@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JavaScript Timer Functions and Arrays</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #493b83;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #f3efff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #493b83;
+        }
+
+        button {
+            background-color: #493b83;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #251b55;
+        }
+
+        #time {
+            font-size: 35px;
+            color: green;
+            font-weight: bold;
+        }
+
+        #para1 {
+            font-size: 18px;
+            color: blue;
+            cursor: pointer;
+        }
+
+        #carArea {
+            height: 100px;
+            background-color: #dddddd;
+            position: relative;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        #car {
+            position: absolute;
+            left: 0px;
+            top: 20px;
+            font-size: 45px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            border: 1px solid gray;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #493b83;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e8e2ff;
+        }
+
+        .result {
+            color: green;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #493b83;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <h1>JavaScript Timer Functions and Arrays</h1>
+            <p>Web Technology Lab - Experiment 06</p>
+        </header>
+
+        <!-- 1. Digital Clock -->
+        <section>
+
+            <h2>1. Digital Clock</h2>
+
+            <p>Current Time:</p>
+
+            <span id="time"></span>
+
+        </section>
+
+        <!-- 2. Dynamic Background -->
+        <section>
+
+            <h2>2. Dynamic Background Colour</h2>
+
+            <p>
+                The background colour changes automatically
+                every 30 seconds.
+            </p>
+
+            <p id="colorStatus" class="result">
+                Background colour is changing automatically.
+            </p>
+
+            <button onclick="setBackgroundColor()">
+                Change Colour Now
+            </button>
+
+        </section>
+
+        <!-- 3. Change Font Size -->
+        <section>
+
+            <h2>3. Change Font Size</h2>
+
+            <p id="para1"
+               onmouseover="incSize()"
+               onmouseout="decSize()">
+
+                Move your mouse over this paragraph to increase
+                the font size!
+            </p>
+
+        </section>
+
+        <!-- 4. Moving Car -->
+        <section>
+
+            <h2>4. Moving Car</h2>
+
+            <p>Click Move to start the car and Stop to stop it.</p>
+
+            <button onclick="moveRight()">Move Car</button>
+
+            <button onclick="stop()">Stop Car</button>
+
+            <div id="carArea">
+
+                <div id="car">🚗</div>
+
+            </div>
+
+        </section>
+
+        <!-- 5. Student Details -->
+        <section>
+
+            <h2>5. Student Details Using Array of Objects</h2>
+
+            <table>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Register Number</th>
+                    <th>Year of Birth</th>
+                    <th>Category</th>
+                </tr>
+
+                <tbody id="studentTable"></tbody>
+
+            </table>
+
+        </section>
+
+        <!-- 6. Class and Object -->
+        <section>
+
+            <h2>6. JavaScript Class and Object</h2>
+
+            <p id="demo"></p>
+
+            <button onclick="showCar()">
+                Display Car Details
+            </button>
+
+        </section>
+
+        <!-- Footer -->
+        <footer>
+
+            <p>Web Technology Lab</p>
+            <p>Experiment No. 06 - JavaScript</p>
+
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        // 1. DIGITAL CLOCK
+
+        function display() {
+
+            var d = new Date();
+
+            var hours = d.getHours();
+            var minutes = d.getMinutes();
+            var seconds = d.getSeconds();
+
+            if (hours < 10) hours = "0" + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+            if (seconds < 10) seconds = "0" + seconds;
+
+            document.getElementById("time").innerHTML =
+                hours + ":" + minutes + ":" + seconds;
+        }
+
+        display();
+
+        setInterval(display, 1000);
+
+
+        // 2. DYNAMIC BACKGROUND COLOUR
+
+        function setBackgroundColor() {
+
+            var red = Math.floor(Math.random() * 255);
+            var green = Math.floor(Math.random() * 255);
+            var blue = Math.floor(Math.random() * 255);
+
+            var color = "rgb(" + red + "," +
+                        green + "," + blue + ")";
+
+            document.body.style.backgroundColor = color;
+        }
+
+        // Change background every 30 seconds
+
+        setInterval(setBackgroundColor, 30000);
+
+
+        // 3. CHANGE FONT SIZE
+
+        function incSize() {
+
+            document.getElementById("para1").style.fontSize =
+                "28px";
+        }
+
+        function decSize() {
+
+            document.getElementById("para1").style.fontSize =
+                "18px";
+        }
+
+
+        // 4. MOVING CAR
+
+        var animate;
+        var position = 0;
+
+        function moveRight() {
+
+            clearInterval(animate);
+
+            animate = setInterval(function() {
+
+                var car = document.getElementById("car");
+
+                var area = document.getElementById("carArea");
+
+                var maxPosition = area.clientWidth - car.offsetWidth;
+
+                position += 2;
+
+                if (position >= maxPosition) {
+                    position = 0;
+                }
+
+                car.style.left = position + "px";
+
+            }, 20);
+        }
+
+        function stop() {
+
+            clearInterval(animate);
+        }
+
+
+        // 5. ARRAY OF STUDENT OBJECTS
+
+        var students = [
+
+            {
+                name: "Angel",
+                regno: "URK24CS9051",
+                dob: 2005
+            },
+
+            {
+                name: "John",
+                regno: "URK24CS9032",
+                dob: 1999
+            },
+
+            {
+                name: "Joseph",
+                regno: "URK24CS9045",
+                dob: 2001
+            },
+
+            {
+                name: "David",
+                regno: "URK24CS9060",
+                dob: 1998
+            },
+
+            {
+                name: "Mary",
+                regno: "URK24CS9070",
+                dob: 2004
+            }
+
+        ];
+
+        var table = "";
+
+        for (var i = 0; i < students.length; i++) {
+
+            var category;
+
+            if (students[i].dob < 2000) {
+                category = "Before 2000";
+            }
+            else {
+                category = "After 2000";
+            }
+
+            table += "<tr>";
+
+            table += "<td>" + students[i].name + "</td>";
+
+            table += "<td>" + students[i].regno + "</td>";
+
+            table += "<td>" + students[i].dob + "</td>";
+
+            table += "<td>" + category + "</td>";
+
+            table += "</tr>";
+        }
+
+        document.getElementById("studentTable").innerHTML =
+            table;
+
+
+        // 6. CLASS AND OBJECT
+
+        class Car {
+
+            constructor(brand) {
+
+                this.carname = brand;
+
+            }
+
+            present() {
+
+                return "I have a " + this.carname;
+
+            }
+
+        }
+
+        function showCar() {
+
+            var mycar = new Car("Ford");
+
+            document.getElementById("demo").innerHTML =
+                mycar.present();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

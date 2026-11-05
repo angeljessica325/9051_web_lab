@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 09 - AngularJS Validation and Routing</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #f2efff;
+            color: #333;
+        }
+
+        header {
+            background: #512da8;
+            color: white;
+            text-align: center;
+            padding: 22px;
+        }
+
+        nav {
+            background: #311b92;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background: #7e57c2;
+            border-radius: 5px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ccc;
+        }
+
+        h2 {
+            color: #512da8;
+        }
+
+        input, select {
+            width: 95%;
+            padding: 11px;
+            margin-top: 6px;
+            margin-bottom: 5px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background: #673ab7;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .page-content {
+            line-height: 1.8;
+        }
+
+        footer {
+            text-align: center;
+            background: #311b92;
+            color: white;
+            padding: 15px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: #f2efff;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 8px;
+        }
+
+        .radio-group {
+            margin: 10px 0;
+        }
+
+        .radio-group input {
+            width: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Student Portal</h1>
+    <p>AngularJS Form Validation and Routing</p>
+</header>
+
+<nav>
+    <a href="#!/">Home</a>
+    <a href="#!/about">About</a>
+    <a href="#!/courses">Courses</a>
+    <a href="#!/contact">Contact</a>
+    <a href="#!/register">Register</a>
+</nav>
+
+<div class="container">
+    <div ng-view></div>
+</div>
+
+<footer>
+    <p>Student Portal | Designed using AngularJS</p>
+</footer>
+
+<script>
+
+var app = angular.module("myApp", ["ngRoute"]);
+
+// ROUTING CONFIGURATION
+app.config(function($routeProvider) {
+
+    $routeProvider
+
+    .when("/", {
+        template: `
+            <div class="box page-content">
+                <h2>Welcome to Student Portal</h2>
+                <p>Welcome to our Student Portal website.</p>
+                <p>This website provides information about courses,
+                student services and registration.</p>
+                <div class="card">
+                    <h3>Learn New Skills</h3>
+                    <p>Explore different courses and improve your knowledge.</p>
+                </div>
+                <div class="card">
+                    <h3>Student Registration</h3>
+                    <p>Register using our validated registration form.</p>
+                    <a href="#!/register">Register Now</a>
+                </div>
+            </div>
+        `
+    })
+
+    .when("/about", {
+        template: `
+            <div class="box page-content">
+                <h2>About Us</h2>
+                <p>Our Student Portal is designed to provide
+                useful information to students.</p>
+                <p>Students can explore courses, view services
+                and register through this website.</p>
+                <h3>Our Mission</h3>
+                <p>To support students in their learning journey
+                through simple and accessible information.</p>
+            </div>
+        `
+    })
+
+    .when("/courses", {
+        template: `
+            <div class="box page-content">
+                <h2>Our Courses</h2>
+
+                <div class="card">
+                    <h3>Web Development</h3>
+                    <p>Learn HTML, CSS, JavaScript and AngularJS.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Python Programming</h3>
+                    <p>Learn Python programming and application development.</p>
+                </div>
+
+                <div class="card">
+                    <h3>Artificial Intelligence</h3>
+                    <p>Explore AI and machine learning concepts.</p>
+                </div>
+            </div>
+        `
+    })
+
+    .when("/contact", {
+        template: `
+            <div class="box page-content">
+                <h2>Contact Us</h2>
+                <p>Email: studentportal@example.com</p>
+                <p>Phone: 9876543210</p>
+                <p>Address: Student Portal, India.</p>
+                <h3>We are happy to help you!</h3>
+            </div>
+        `
+    })
+
+    .when("/register", {
+        template: `
+            <div class="box" ng-controller="RegisterController">
+                <h2>User Registration Form</h2>
+
+                <form name="regForm" ng-submit="submitForm()" novalidate>
+
+                    <label>Name</label>
+                    <input type="text" name="name"
+                           ng-model="user.name"
+                           ng-pattern="/^[A-Za-z ]+$/"
+                           required
+                           placeholder="Enter your name">
+
+                    <span class="error"
+                          ng-show="regForm.name.$touched && regForm.name.$error.required">
+                        Name is required.
+                    </span>
+
+                    <span class="error"
+                          ng-show="regForm.name.$touched && regForm.name.$error.pattern">
+                        Name should contain only letters.
+                    </span>
+
+
+                    <label>Password</label>
+                    <input type="password" name="password"
+                           ng-model="user.password"
+                           ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/"
+                           required
+                           placeholder="Enter password">
+
+                    <span class="error"
+                          ng-show="regForm.password.$touched && regForm.password.$invalid">
+                        Password must have 8 characters, uppercase,
+                        lowercase and a number.
+                    </span>
+
+
+                    <label>Age</label>
+                    <input type="number" name="age"
+                           ng-model="user.age"
+                           min="18" max="30"
+                           required
+                           placeholder="Enter your age">
+
+                    <span class="error"
+                          ng-show="regForm.age.$touched && regForm.age.$invalid">
+                        Age must be between 18 and 30.
+                    </span>
+
+
+                    <label>Mobile Number</label>
+                    <input type="text" name="mobile"
+                           ng-model="user.mobile"
+                           ng-pattern="/^[0-9]{10}$/"
+                           required
+                           placeholder="Enter 10 digit mobile number">
+
+                    <span class="error"
+                          ng-show="regForm.mobile.$touched && regForm.mobile.$invalid">
+                        Enter a valid 10 digit mobile number.
+                    </span>
+
+
+                    <label>Email</label>
+                    <input type="email" name="email"
+                           ng-model="user.email"
+                           required
+                           placeholder="Enter your email">
+
+                    <span class="error"
+                          ng-show="regForm.email.$touched && regForm.email.$invalid">
+                        Enter a valid email address.
+                    </span>
+
+
+                    <label>Gender</label>
+                    <select name="gender" ng-model="user.gender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+
+                    <span class="error"
+                          ng-show="regForm.gender.$touched && regForm.gender.$invalid">
+                        Please select your gender.
+                    </span>
+
+
+                    <label>State</label>
+                    <select name="state" ng-model="user.state" required>
+                        <option value="">Select State</option>
+                        <option>Andhra Pradesh</option>
+                        <option>Tamil Nadu</option>
+                        <option>Kerala</option>
+                        <option>Karnataka</option>
+                        <option>Maharashtra</option>
+                        <option>Telangana</option>
+                    </select>
+
+                    <span class="error"
+                          ng-show="regForm.state.$touched && regForm.state.$invalid">
+                        Please select your state.
+                    </span>
+
+                    <br><br>
+
+                    <button type="submit"
+                            ng-disabled="regForm.$invalid">
+                        Submit Registration
+                    </button>
+
+                    <p class="success" ng-if="submitted">
+                        Registration submitted successfully!
+                    </p>
+
+                </form>
+            </div>
+        `
+    })
+
+    .otherwise({
+        redirectTo: "/"
+    });
+
+});
+
+
+// REGISTRATION CONTROLLER
+app.controller("RegisterController", function($scope) {
+
+    $scope.user = {};
+    $scope.submitted = false;
+
+    $scope.submitForm = function() {
+        $scope.submitted = true;
+    };
+
+});
+
+</script>
+
+</body>
+</html>

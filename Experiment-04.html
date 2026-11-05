@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Flower Gallery</title>
+
+    <style>
+
+        /* Basic Page Styling */
+        body {
+            margin: 20px;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+        }
+
+        .container {
+            width: 90%;
+            margin: auto;
+            background-color: white;
+            border: 2px solid gray;
+        }
+
+        /* Header with Multiple Backgrounds */
+        header {
+            height: 150px;
+
+            background-image:
+                url("https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=150&q=80"),
+                url("https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=150&q=80"),
+                linear-gradient(to right, #0755a5, #5599dd);
+
+            background-repeat: no-repeat, no-repeat, no-repeat;
+
+            background-position:
+                left 15px top 15px,
+                left 65px top 65px,
+                center;
+
+            background-size:
+                65px 65px,
+                65px 65px,
+                cover;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background: linear-gradient(to right, #aaaaaa, #eeeeee);
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            display: inline-block;
+            width: 20%;
+            padding: 10px 0;
+            color: black;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: red;
+            color: white;
+        }
+
+        nav a:active {
+            background-color: darkred;
+        }
+
+        /* Flower Section */
+        .flowers {
+            background-color: pink;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .flowers h2 {
+            color: darkgreen;
+        }
+
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid green;
+        }
+
+        th {
+            background-color: green;
+            color: white;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #b7f76b;
+        }
+
+        tr:nth-child(even) {
+            background-color: #6bd66b;
+        }
+
+        tr:hover {
+            background-color: yellow;
+        }
+
+        .flower-image img {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            opacity: 0.3;
+        }
+
+        .flower-name:hover + .flower-image img {
+            opacity: 1;
+        }
+
+        /* Login and Registration Section */
+        .login-section {
+            padding: 35px 15px;
+
+            background-image:
+                linear-gradient(rgba(0, 0, 0, 0.4),
+                rgba(0, 0, 0, 0.4)),
+                url("https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&q=80");
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        /* Form Boxes */
+        .form-box {
+            width: 230px;
+            padding: 20px;
+            background-color: white;
+
+            border-radius: 15px;
+
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, blue, skyblue) 1;
+
+            box-shadow: 5px 5px 15px black;
+        }
+
+        .form-box h2 {
+            text-align: center;
+        }
+
+        .form-box label {
+            font-size: 14px;
+        }
+
+        .form-box input {
+            width: 95%;
+            padding: 9px 5px;
+            margin: 8px 0;
+            background-color: #eeeeee;
+            border: 1px solid gray;
+        }
+
+        /* Input Pseudo Classes */
+        input:focus {
+            border: 2px solid blue;
+            background-color: #e8f2ff;
+            outline: none;
+        }
+
+        input:required {
+            border-left: 3px solid blue;
+        }
+
+        input[type="email"]:valid {
+            background-color: #e5ffe5;
+        }
+
+        input[type="email"]:invalid {
+            background-color: #ffe5e5;
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            background: linear-gradient(to right, blue, #3399ff);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: darkblue;
+            box-shadow: 2px 2px 5px gray;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, #ffe0b2, #fff0d9);
+            padding: 15px;
+            font-style: italic;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+
+            .container {
+                width: 100%;
+            }
+
+            nav a {
+                width: 45%;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            .login-section {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .form-box {
+                width: 75%;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header Section -->
+        <header>
+        </header>
+
+        <!-- Navigation Section -->
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#flowers">Flowers</a>
+            <a href="#login">Sign In</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <!-- Flower Gallery Section -->
+        <section class="flowers" id="flowers">
+
+            <h2>My Favourite Flowers</h2>
+
+            <p>Explore some beautiful flowers and their colours.</p>
+
+            <table>
+
+                <tr>
+                    <th>Flower Name</th>
+                    <th>Image</th>
+                </tr>
+
+                <tr>
+                    <td class="flower-name">Rose</td>
+                    <td class="flower-image">
+                        <img src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=100&q=80"
+                             alt="Rose">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="flower-name">Tulip</td>
+                    <td class="flower-image">
+                        <img src="https://images.unsplash.com/photo-1520763185298-1b434c919102?w=100&q=80"
+                             alt="Tulip">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="flower-name">Sunflower</td>
+                    <td class="flower-image">
+                        <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=100&q=80"
+                             alt="Sunflower">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="flower-name">Lily</td>
+                    <td class="flower-image">
+                        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=100&q=80"
+                             alt="Lily">
+                    </td>
+                </tr>
+
+            </table>
+
+        </section>
+
+        <!-- Sign In and Sign Up Section -->
+        <section class="login-section" id="login">
+
+            <!-- Sign In Form -->
+            <div class="form-box">
+
+                <h2>Sign In</h2>
+
+                <form>
+
+                    <label>Username</label>
+
+                    <input type="text"
+                           placeholder="Enter Username"
+                           required>
+
+                    <label>Password</label>
+
+                    <input type="password"
+                           placeholder="Enter Password"
+                           required>
+
+                    <button type="submit">Sign In</button>
+
+                </form>
+
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="form-box">
+
+                <h2>Sign Up</h2>
+
+                <form>
+
+                    <label>Name</label>
+
+                    <input type="text"
+                           placeholder="Enter Name"
+                           required>
+
+                    <label>Email</label>
+
+                    <input type="email"
+                           placeholder="Enter Email"
+                           required>
+
+                    <label>Password</label>
+
+                    <input type="password"
+                           placeholder="Enter Password"
+                           required>
+
+                    <button type="submit">Sign Up</button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- Footer Section -->
+        <footer id="contact">
+
+            <p><b>Your Address:</b> Solapur, Maharashtra</p>
+
+            <p>
+                &copy; 2026. Web Technology Lab.
+                All Rights Reserved.
+            </p>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>

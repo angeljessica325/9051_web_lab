@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+
+    <style>
+        body {
+            font-family: "Times New Roman", serif;
+            background-color: white;
+        }
+
+        h2 {
+            text-align: center;
+            color: blue;
+            font-size: 26px;
+        }
+
+        form {
+            width: 400px;
+            margin: 25px auto;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 17px;
+        }
+
+        label {
+            width: 125px;
+            color: blue;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            width: 130px;
+            box-sizing: border-box;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-left: 4px;
+        }
+
+        .skills {
+            white-space: nowrap;
+        }
+
+        button {
+            margin-left: 125px;
+            margin-top: 15px;
+        }
+
+        .required {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>User Registration Form</h2>
+
+    <form action="/server" method="POST" id="registrationForm">
+
+        <div class="form-row">
+            <label>Name<span class="required">*</span></label>
+            <input type="text" name="name"
+                   placeholder="Enter name"
+                   pattern="[A-Za-z ]{3,40}"
+                   title="Enter 3 to 40 letters"
+                   required>
+        </div>
+
+        <div class="form-row">
+            <label>Password<span class="required">*</span></label>
+            <input type="password" name="password"
+                   minlength="6" required>
+        </div>
+
+        <div class="form-row">
+            <label>Age<span class="required">*</span></label>
+            <input type="number" name="age"
+                   min="1" max="120" required>
+        </div>
+
+        <div class="form-row">
+            <label>Mobile Number<span class="required">*</span></label>
+            <input type="tel" name="mobile"
+                   pattern="[0-9]{10}"
+                   maxlength="10"
+                   title="Enter exactly 10 digits"
+                   required>
+        </div>
+
+        <div class="form-row">
+            <label>Email<span class="required">*</span></label>
+            <input type="email" name="email" required>
+        </div>
+
+        <div class="form-row">
+            <label>Gender<span class="required">*</span></label>
+
+            <div>
+                <input type="radio" name="gender"
+                       value="Male" required>Male
+
+                <input type="radio" name="gender"
+                       value="Female">Female
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label>State<span class="required">*</span></label>
+
+            <select name="state" required>
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option>
+                <option>Kerala</option>
+                <option>Tamil Nadu</option>
+                <option>Karnataka</option>
+                <option>Maharashtra</option>
+                <option>Telangana</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>Skills<span class="required">*</span></label>
+
+            <div class="skills">
+                <input type="checkbox" name="skills"
+                       value="JavaScript">Java Script
+
+                <input type="checkbox" name="skills"
+                       value="Python">Python
+
+                <input type="checkbox" name="skills"
+                       value="C++">C++
+
+                <input type="checkbox" name="skills"
+                       value="Java">Java
+            </div>
+        </div>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <script>
+        const form = document.getElementById("registrationForm");
+        const skillBoxes = form.querySelectorAll(
+            'input[name="skills"]'
+        );
+
+        function validateSkills() {
+            const checked = [...skillBoxes].some(
+                checkbox => checkbox.checked
+            );
+
+            skillBoxes[0].setCustomValidity(
+                checked ? "" : "Please select at least one skill"
+            );
+        }
+
+        skillBoxes.forEach(box => {
+            box.addEventListener("change", validateSkills);
+        });
+
+        form.addEventListener("submit", validateSkills);
+    </script>
+
+</body>
+</html>

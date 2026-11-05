@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 08 - AngularJS Directives</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2efff;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #512da8;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px #ccc;
+        }
+
+        h2 {
+            color: #673ab7;
+        }
+
+        input, textarea, select {
+            width: 95%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #673ab7;
+            color: white;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background: #4527a0;
+        }
+
+        li {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .result {
+            color: #512da8;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .remove {
+            background: #e53935;
+            float: right;
+        }
+    </style>
+</head>
+
+<body ng-controller="MainController">
+
+    <div class="container">
+
+        <h1>AngularJS Directives</h1>
+
+        <!-- Hello World -->
+        <div class="box">
+            <h2>1. Hello World Application</h2>
+            <h3>{{ message }}</h3>
+        </div>
+
+        <!-- Comment Box -->
+        <div class="box">
+            <h2>2. Simple Comment Box</h2>
+
+            <textarea ng-model="newComment"
+                      placeholder="Write your comment..."></textarea>
+
+            <button ng-click="addComment()">Post Comment</button>
+
+            <h3>Comments</h3>
+
+            <ul>
+                <li ng-repeat="comment in comments track by $index">
+                    {{ comment }}
+                    <button class="remove"
+                            ng-click="removeComment($index)">X</button>
+                </li>
+            </ul>
+
+            <p ng-if="comments.length == 0">No comments yet.</p>
+        </div>
+
+        <!-- Calculator -->
+        <div class="box">
+            <h2>3. Simple Calculator</h2>
+
+            <input type="number" ng-model="a" placeholder="Enter first number">
+
+            <input type="number" ng-model="b" placeholder="Enter second number">
+
+            <select ng-model="operator">
+                <option value="+">Addition (+)</option>
+                <option value="-">Subtraction (-)</option>
+                <option value="*">Multiplication (*)</option>
+                <option value="/">Division (/)</option>
+            </select>
+
+            <h3 class="result">Result: {{ calculate() }}</h3>
+        </div>
+
+        <!-- Todo List -->
+        <div class="box">
+            <h2>4. Simple To-Do List</h2>
+
+            <input type="text" ng-model="taskTitle"
+                   placeholder="Enter a task">
+
+            <button ng-click="addTask()">Add Task</button>
+
+            <ul>
+                <li ng-repeat="task in tasks track by $index">
+                    {{ task }}
+                    <button class="remove"
+                            ng-click="removeTask($index)">X</button>
+                </li>
+            </ul>
+
+            <p ng-if="tasks.length == 0">No tasks added.</p>
+        </div>
+
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+
+        app.controller("MainController", function($scope) {
+
+            // Hello World
+            $scope.message = "Hello World! Welcome to AngularJS.";
+
+            // Comment Box
+            $scope.comments = [];
+
+            $scope.addComment = function() {
+                if ($scope.newComment && $scope.newComment.trim() !== "") {
+                    $scope.comments.push($scope.newComment);
+                    $scope.newComment = "";
+                }
+            };
+
+            $scope.removeComment = function(index) {
+                $scope.comments.splice(index, 1);
+            };
+
+            // Calculator
+            $scope.a = 0;
+            $scope.b = 0;
+            $scope.operator = "+";
+
+            $scope.calculate = function() {
+                var x = Number($scope.a);
+                var y = Number($scope.b);
+
+                if ($scope.operator == "+") {
+                    return x + y;
+                }
+                else if ($scope.operator == "-") {
+                    return x - y;
+                }
+                else if ($scope.operator == "*") {
+                    return x * y;
+                }
+                else if ($scope.operator == "/") {
+                    return y !== 0 ? x / y : "Cannot divide by zero";
+                }
+            };
+
+            // To-Do List
+            $scope.tasks = [];
+
+            $scope.addTask = function() {
+                if ($scope.taskTitle && $scope.taskTitle.trim() !== "") {
+                    $scope.tasks.push($scope.taskTitle);
+                    $scope.taskTitle = "";
+                }
+            };
+
+            $scope.removeTask = function(index) {
+                $scope.tasks.splice(index, 1);
+            };
+
+        });
+    </script>
+
+</body>
+</html>

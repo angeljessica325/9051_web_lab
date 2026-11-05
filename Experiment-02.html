@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My HTML5 Showcase Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f6fa;
+            margin: 20px;
+            color: #333;
+        }
+
+        header {
+            background-color: #2874a6;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #d6eaf8;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 15px;
+            text-decoration: none;
+            color: darkblue;
+        }
+
+        section {
+            background-color: white;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        h2 {
+            color: #2874a6;
+        }
+
+        img {
+            width: 300px;
+            height: 180px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #aed6f1;
+        }
+
+        input, select {
+            margin: 8px 0;
+            padding: 7px;
+        }
+
+        fieldset {
+            padding: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 8px;
+            cursor: pointer;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px;
+            border: 1px solid gray;
+        }
+
+        footer {
+            background-color: #2874a6;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>My HTML5 Showcase Page</h1>
+        <p>Learning and Exploring HTML5 Elements</p>
+    </header>
+
+    <!-- Navigation Section -->
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#elements">HTML Elements</a>
+        <a href="#form">Registration Form</a>
+        <a href="#media">Media</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+
+        <h2>Welcome to My HTML5 Page</h2>
+
+        <p>
+            HTML5 is the standard language used to create web pages.
+            This website demonstrates different HTML5 elements and their uses.
+            It includes tables, forms, images, audio and video.
+            It also demonstrates how to embed another webpage using HTML.
+        </p>
+
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80"
+             alt="Computer and web development">
+
+        <p>
+            Learn more about HTML:
+            <a href="https://www.w3schools.com/html/" target="_blank">
+                W3Schools HTML Tutorial
+            </a>
+        </p>
+
+    </section>
+
+    <!-- HTML Elements Table Section -->
+    <section id="elements">
+
+        <h2>HTML Elements and Their Uses</h2>
+
+        <table>
+
+            <tr>
+                <th>Element</th>
+                <th>Category</th>
+                <th>Purpose</th>
+            </tr>
+
+            <tr>
+                <td>Heading</td>
+                <td>Text</td>
+                <td>Displays headings on a webpage.</td>
+            </tr>
+
+            <tr>
+                <td>Image</td>
+                <td>Media</td>
+                <td>Displays pictures on a webpage.</td>
+            </tr>
+
+            <tr>
+                <td>Table</td>
+                <td>Structure</td>
+                <td>Displays data in rows and columns.</td>
+            </tr>
+
+            <tr>
+                <td>Form</td>
+                <td>Input</td>
+                <td>Collects information from users.</td>
+            </tr>
+
+        </table>
+
+    </section>
+
+    <!-- Form Section -->
+    <section id="form">
+
+        <h2>Student Registration Form</h2>
+
+        <form action="#" method="get">
+
+            <fieldset>
+
+                <legend>Personal Information</legend>
+
+                <label for="name">Full Name:</label><br>
+                <input type="text" id="name" name="name"
+                       placeholder="Enter your name" required>
+                <br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"
+                       placeholder="Enter your email" required>
+                <br><br>
+
+                <label for="phone">Phone Number:</label><br>
+                <input type="tel" id="phone" name="phone"
+                       placeholder="Enter phone number">
+                <br><br>
+
+                <label for="dob">Date of Birth:</label><br>
+                <input type="date" id="dob" name="dob">
+                <br><br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password">
+                <br><br>
+
+                <label>Gender:</label><br>
+
+                <input type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label>
+
+                <input type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label>
+
+                <br><br>
+
+                <label>Skills:</label><br>
+
+                <input type="checkbox" id="html" name="skills" value="HTML">
+                <label for="html">HTML</label>
+
+                <input type="checkbox" id="css" name="skills" value="CSS">
+                <label for="css">CSS</label>
+
+                <input type="checkbox" id="js" name="skills" value="JavaScript">
+                <label for="js">JavaScript</label>
+
+                <br><br>
+
+                <label for="course">Select Course:</label><br>
+
+                <select id="course" name="course">
+                    <option value="HTML">HTML</option>
+                    <option value="CSS">CSS</option>
+                    <option value="JavaScript">JavaScript</option>
+                </select>
+
+                <br><br>
+
+                <label for="photo">Upload Photo:</label><br>
+                <input type="file" id="photo" name="photo">
+
+                <br><br>
+
+                <label for="interest">Learning Interest:</label><br>
+                <input type="range" id="interest" name="interest"
+                       min="0" max="100">
+
+                <br><br>
+
+                <label>Course Completion Progress:</label><br>
+                <progress value="60" max="100"></progress> 60%
+
+                <br><br>
+
+                <button type="submit">Submit</button>
+                <button type="reset">Reset</button>
+
+            </fieldset>
+
+        </form>
+
+    </section>
+
+    <!-- Audio and Video Section -->
+    <section id="media">
+
+        <h2>HTML5 Audio</h2>
+
+        <p>Listen to the sample audio:</p>
+
+        <audio controls>
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"
+                    type="audio/mpeg">
+            Your browser does not support audio.
+        </audio>
+
+        <h2>HTML5 Video</h2>
+
+        <p>Watch the sample video:</p>
+
+        <video width="400" height="250" controls>
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+                    type="video/mp4">
+            Your browser does not support video.
+        </video>
+
+        <p>
+            <a href="https://www.w3schools.com/html/"
+               target="_blank">Visit HTML Learning Website</a>
+        </p>
+
+    </section>
+
+    <!-- Embedded Webpage Section -->
+    <section>
+
+        <h2>Embedded Webpage</h2>
+
+        <p>Below is an embedded map webpage:</p>
+
+        <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=76.9%2C8.0%2C77.1%2C8.2&layer=mapnik"
+            title="Embedded Map">
+        </iframe>
+
+    </section>
+
+    <!-- Footer Section -->
+    <footer id="contact">
+
+        <p>My HTML5 Showcase Page</p>
+        <p>Created for HTML Experiment 2</p>
+        <p>Copyright &copy; 2026 All Rights Reserved.</p>
+
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Working with jQuery</title>
+
+    <!-- jQuery Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #493b83;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        section {
+            background-color: #f3efff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #493b83;
+        }
+
+        input, select {
+            padding: 8px;
+            margin: 7px;
+            border: 1px solid gray;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #493b83;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #261d61;
+        }
+
+        .result {
+            color: green;
+            font-weight: bold;
+        }
+
+        #car {
+            font-size: 100px;
+            text-align: center;
+            margin: 20px;
+            transition: 0.3s;
+        }
+
+        footer {
+            background-color: #493b83;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            margin-top: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header>
+            <h1>Working with jQuery</h1>
+            <p>Web Technology Lab - Experiment 07</p>
+        </header>
+
+
+        <!-- 1. Budget Calculator -->
+        <section>
+
+            <h2>1. Budget Calculator</h2>
+
+            <label>Total Amount (Rs.):</label>
+            <input type="number" id="amount" placeholder="Enter amount">
+
+            <br><br>
+
+            <label>Room Rent (%):</label>
+            <input type="number" id="rent" value="30">
+
+            <br>
+
+            <label>Accessories (%):</label>
+            <input type="number" id="accessories" value="20">
+
+            <br>
+
+            <label>Emergency (%):</label>
+            <input type="number" id="emergency" value="10">
+
+            <br>
+
+            <label>Saving (%):</label>
+            <input type="number" id="saving" value="40">
+
+            <br><br>
+
+            <button id="budgetBtn">Evaluate My Money</button>
+
+            <h3>Budget Results</h3>
+
+            <p>Room Rent: Rs. <span id="rentResult" class="result">0</span></p>
+
+            <p>Accessories: Rs. <span id="accessoriesResult" class="result">0</span></p>
+
+            <p>Emergency: Rs. <span id="emergencyResult" class="result">0</span></p>
+
+            <p>Saving: Rs. <span id="savingResult" class="result">0</span></p>
+
+        </section>
+
+
+        <!-- 2. Cake Order Calculator -->
+        <section>
+
+            <h2>2. Cake Order Calculator</h2>
+
+            <label>Choose Cake:</label>
+
+            <select id="cake">
+                <option value="0">Select Cake</option>
+                <option value="500">Chocolate Cake - Rs.500</option>
+                <option value="700">Vanilla Cake - Rs.700</option>
+                <option value="900">Black Forest Cake - Rs.900</option>
+                <option value="1000">Red Velvet Cake - Rs.1000</option>
+            </select>
+
+            <br><br>
+
+            <label>Quantity:</label>
+
+            <input type="number" id="quantity" min="1" value="1">
+
+            <br><br>
+
+            <button id="cakeBtn">Calculate Price</button>
+
+            <p>Total Cake Price: Rs.
+                <span id="cakeResult" class="result">0</span>
+            </p>
+
+        </section>
+
+
+        <!-- 3. Car Body Workshop -->
+        <section>
+
+            <h2>3. Car Body Workshop</h2>
+
+            <div id="car">🚗</div>
+
+            <label>Change Car Colour:</label>
+
+            <select id="carColor">
+                <option value="red">Red</option>
+                <option value="blue">Blue</option>
+                <option value="green">Green</option>
+                <option value="black">Black</option>
+                <option value="orange">Orange</option>
+            </select>
+
+            <br><br>
+
+            <label>Glass Tint:</label>
+
+            <select id="glassTint">
+                <option value="1">Normal</option>
+                <option value="0.7">Light Tint</option>
+                <option value="0.4">Dark Tint</option>
+                <option value="0.2">Very Dark Tint</option>
+            </select>
+
+            <br><br>
+
+            <label>Tyre Size:</label>
+
+            <select id="tyreSize">
+                <option value="80">Small</option>
+                <option value="100">Medium</option>
+                <option value="120">Large</option>
+            </select>
+
+            <br><br>
+
+            <button id="resetCar">Reset Car</button>
+
+        </section>
+
+
+        <!-- Footer -->
+        <footer>
+            <p>Web Technology Lab</p>
+            <p>Experiment No. 07 - Working with jQuery</p>
+        </footer>
+
+    </div>
+
+
+    <script>
+
+        $(document).ready(function() {
+
+
+            // 1. BUDGET CALCULATOR
+
+            $("#budgetBtn").click(function() {
+
+                var amount = parseFloat($("#amount").val());
+
+                var rent = parseFloat($("#rent").val());
+                var accessories = parseFloat($("#accessories").val());
+                var emergency = parseFloat($("#emergency").val());
+                var saving = parseFloat($("#saving").val());
+
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Please enter a valid amount.");
+                    return;
+                }
+
+                if ([rent, accessories, emergency, saving].some(
+                    value => isNaN(value) || value < 0
+                )) {
+                    alert("Enter valid non-negative percentages.");
+                    return;
+                }
+
+                var total = rent + accessories + emergency + saving;
+
+                if (total != 100) {
+                    alert("The total percentage must be 100%.");
+                    return;
+                }
+
+                $("#rentResult").text((amount * rent / 100).toFixed(2));
+
+                $("#accessoriesResult").text(
+                    (amount * accessories / 100).toFixed(2)
+                );
+
+                $("#emergencyResult").text(
+                    (amount * emergency / 100).toFixed(2)
+                );
+
+                $("#savingResult").text(
+                    (amount * saving / 100).toFixed(2)
+                );
+
+            });
+
+
+            // 2. CAKE ORDER CALCULATOR
+
+            $("#cakeBtn").click(function() {
+
+                var price = parseFloat($("#cake").val());
+
+                var quantity = parseInt($("#quantity").val());
+
+                if (price <= 0 || isNaN(price) ||
+                    quantity <= 0 || isNaN(quantity)) {
+
+                    alert("Please select a cake and enter valid quantity.");
+
+                    return;
+                }
+
+                var total = price * quantity;
+
+                $("#cakeResult").text(total);
+
+            });
+
+
+            // 3. CAR BODY WORKSHOP
+
+            $("#carColor").change(function() {
+
+                var color = $(this).val();
+
+                $("#car").css("color", color);
+
+            });
+
+
+            $("#glassTint").change(function() {
+
+                var tint = $(this).val();
+
+                $("#car").css("opacity", tint);
+
+            });
+
+
+            $("#tyreSize").change(function() {
+
+                var size = $(this).val();
+
+                $("#car").css("font-size", size + "px");
+
+            });
+
+
+            // RESET CAR
+
+            $("#resetCar").click(function() {
+
+                $("#car").css({
+                    "color": "red",
+                    "opacity": "1",
+                    "font-size": "100px"
+                });
+
+                $("#carColor").val("red");
+                $("#glassTint").val("1");
+                $("#tyreSize").val("100");
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
